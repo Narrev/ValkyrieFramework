@@ -38,6 +38,12 @@ local function ApplySettingsToIcon(self, Side, Icon, Settings)
 		Icon.ImageColor3 	= Settings.Color;
 	end
 
+        if Settings.InputColor then
+                AssertType("Settings.InputColor", Settings.InputColor, "Color");
+
+                self["Get" .. Side .. "Icon"](self).InputColor = Settings.InputColor;
+        end
+
 	if Settings.Icon then
 		AssertType("Settings.Icon", 		Settings.Icon, 			"table");
 		AssertType("Settings.Icon.Tileset", Settings.Icon.Tileset, 	"string");

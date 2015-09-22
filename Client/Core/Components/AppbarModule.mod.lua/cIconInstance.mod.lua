@@ -33,12 +33,18 @@ function cIconInstance.new(Side, Icon, AltIcon, AppbarInstance)
 		MainIcon 		= Icon;
 		AltIcon 		= AltIcon;
 		Side 			= Side;
+                MainInputCue            = MainIcon.InputCue;
+                AltInputCue             = AltIcon.InputCue;
 	};
+
+        local function ShowInputCue()
+            -- TODO: Show input cue
+        end;
 
 	return IconInstance;
 end
 
-function InstanceFunctions:TweenIconColor(NewColor, Tween, Duration, Async)
+function InstanceFunctions:TweenIconColor(NewColor, NewInputColor, Tween, Duration, Async)
 	AssertType("Argument #1", NewColor, "Color3");
 	AssertType("Argument #2", Tween, 	"string", 	true);
 	AssertType("Argument #3", Duration, "number", 	true);
@@ -46,11 +52,14 @@ function InstanceFunctions:TweenIconColor(NewColor, Tween, Duration, Async)
 
 	local MainIcon 		= self:GetMainIcon();
 	local AltIcon 		= self:GetAltIcon();
+        local InputCue          = self:GetInputCue();
 	-- Again, wonder if I should make a debounce
 	local function Runner()
 		-- Two need to run at the same time
+                spawn(function()        InputCue:TweenImageColor(NewInputColor, Tween, Duration); end);
 		spawn(function() 	MainIcon:TweenImageColor3(NewColor, Tween, Duration); end);
 							AltIcon	:TweenImageColor3(NewColor, Tween, Duration);
+
 	end
 
 	if Async then
@@ -127,6 +136,14 @@ end
 
 function InstanceFunctions:GetCallback()
 	return SharedVariables[self].Connections;
+end
+
+function InstanceFunctions:GetMainInputCue()
+        return SharedVariables[self].MainInputCue;
+end
+
+function InstanceFunctions:GetAltInputCue()
+        return SharedVariables[self].AltInputCUe;
 end
 
 function InstanceFunctions:DisconnectCallback()
