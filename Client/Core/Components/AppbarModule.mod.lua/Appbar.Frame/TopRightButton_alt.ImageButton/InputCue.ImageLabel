@@ -5,5 +5,6 @@
 	"ZIndex":					[3, 9],
 	"ImageRectSize": 			[13, {"X": 30, "Y": 30}],
 	"BorderSizePixel":			[3, 0],
-        "Visible":                              [2, false]
+        "Visible":                              [2, false],
+        "Image":                                [1, "rbxassetid://232918623"]
 }
