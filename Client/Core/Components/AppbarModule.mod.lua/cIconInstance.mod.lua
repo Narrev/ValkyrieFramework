@@ -4,6 +4,7 @@ local Core          		= _G.ValkyrieC;
 local cIconInstance 		= wrapper({});
 local InstanceFunctions 	= {};
 local SharedVariables 		= Core:GetComponent "References";
+local InputCueDebounce          = setmetatable({}, {__mode = "k"});
 
 local CommonMetatable 		= {
 	__index 				= InstanceFunctions;
@@ -35,10 +36,26 @@ function cIconInstance.new(Side, Icon, AltIcon, AppbarInstance)
 		Side 			= Side;
                 MainInputCue            = MainIcon.InputCue;
                 AltInputCue             = AltIcon.InputCue;
+                InputCueEasing          = "inQuad";
+                InputCueDuration        = 0.5;
 	};
 
-        local function ShowInputCue()
-            -- TODO: Show input cue
+        local function ShowInputCue(Icon) -- The user may click the alt icon while the icons are tweening
+                local InputCue          = Icon.InputCue;
+
+                if InputCueDebounce[Icon] then
+                    return;
+                else
+                    InputCueDebounce[Icon] = true;
+                end
+
+                InputCue.Visible        = true;
+                InputCue.Position       = UDim2.new(0, Icon.AbsoluteSize.X / 2, 0, Icon.AbsoluteSize.Y / 2);
+                InputCue.Size           = UDim2.new(0, 0, 0, 0);
+                spawn(function() InputCue:VTweenSize(UDim2.new(0, Icon.AbsoluteSize.X, 0, Icon.AbsoluteSize.Y), IconInstance:GetInputCueEasing(), IconInstance:GetInputCueDuration()); end);
+                InputCue:VTweenPosition(UDim2.new(0, 0, 0, 0), IconInstance:GetInputCueEasing(), IconInstance:GetInputCueDuration());
+
+                InputCueDebounce[Icon]  = false;
         end;
 
 	return IconInstance;
@@ -143,7 +160,15 @@ function InstanceFunctions:GetMainInputCue()
 end
 
 function InstanceFunctions:GetAltInputCue()
-        return SharedVariables[self].AltInputCUe;
+        return SharedVariables[self].AltInputCue;
+end
+
+function InstanceFunctions:GetInputCueEasing()
+        return SharedVariables[self].InputCueEasing;
+end
+
+function InstanceFunctions:GetInputCueDuration()
+        return SharedVariables[self].InputCueDuration;
 end
 
 function InstanceFunctions:DisconnectCallback()
@@ -169,8 +194,8 @@ function InstanceFunctions:SetCallback(Callback)
 	end
 
 	SharedVariables[self].Connections = {
-		Main	 			= self:GetMainIcon().InputEnded:connect(Connection);
-		Alt					= self:GetAltIcon().InputEnded:connect(Connection);
+		Main	 			= self:GetMainIcon().MouseButton1Click:connect(Connection);
+		Alt					= self:GetAltIcon().MouseButton1Click:connect(Connection);
 	};
 end
 
