@@ -31,7 +31,7 @@ function cItemInstance.new(Item)
 
 	local ItemInstance 		= newproxy(true);
 	CopyMetatable(ItemInstance, SharedMetatable);
-	SharedVariables[ItemInstance] = {Raw = Item, Extension = Item.Extend1};
+	SharedVariables[ItemInstance] = {Raw = Item, Text = Item.Text};
 
 	return ItemInstance;
 end
@@ -51,11 +51,11 @@ function InstanceFunctions:TweenBackgroundColor(NewColor, Tween, Duration, Async
 	AssertType("Argument #4", Async, 	"boolean", 	true);
 
 	local MainObject 			= self:GetRaw();
-	local Extend	 			= self:GetExtension();
+	local Text  	 			= self:GetText();
 
 	local function Runner()
 		spawn(function() 	MainObject:TweenBackgroundColor3(NewColor, Tween, Duration); end);
-							Extend 	  :TweenBackgroundColor3(NewColor, Tween, Duration);
+							Text 	  :TweenBackgroundColor3(NewColor, Tween, Duration);
 	end
 
 	if Async then
@@ -72,12 +72,11 @@ function InstanceFunctions:TweenOnX(New, Tween, Duration, Async)
 	AssertType("Argument #4", Async, 	"boolean", 	true);
 
 	local MainObject 			= self:GetRaw();
-	local Extend	 			= self:GetExtension();
+	local Text  	 			= self:GetText();
 
 	local function Runner()
-		spawn(function() 	Extend		:VTweenSize(	UDim2.new(0, 10 + New, 1, 0),  Tween, Duration); end);
-		spawn(function() 	Extend		:VTweenPosition(UDim2.new(0, -10 - New, 0, 0), Tween, Duration); end);
-							MainObject	:VTweenPosition(UDim2.new(0, 10 + New, 0, MainObject.Position.Y.Offset),  Tween, Duration);
+        spawn(function() Text:VTweenPosition(UDim2.new(0, 10 + New, 0, 0),                          Tween, Duration); end);
+		        MainObject	 :VTweenSize(UDim2.new(0, New - 150, 0, MainObject.Position.Y.Offset),  Tween, Duration);
 	end
 
 	if Async then

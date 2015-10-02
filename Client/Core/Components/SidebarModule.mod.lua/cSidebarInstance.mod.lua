@@ -118,17 +118,17 @@ local function CreateItemWithSettings(Settings, Index, Sidebar)
 		AssertType("Settings.BackgroundColor", Settings.BackgroundColor, "Color3");
 
 		Item.BackgroundColor3 			= Settings.BackgroundColor;
-		Item.Extend1.BackgroundColor3	= Settings.BackgroundColor;
+		Item.Text.BackgroundColor3	    = Settings.BackgroundColor;
 	end
 
 	if Settings.TextColor then
 		AssertType("Settings.TextColor", Settings.TextColor, "Color3");
 
-		Item.TextColor3 				= Settings.TextColor;
+		Item.Text.TextColor3 			= Settings.TextColor;
 	end
 
 	if Settings.Text then
-		Item.Text 						= tostring(Settings.Text);
+		Item.Text.Text 					= tostring(Settings.Text);
 	end
 
 	Item.Position 						= UDim2.new(0, 10, 0, 30 * Index);
@@ -311,9 +311,7 @@ function InstanceFunctions:SetItem(Index, Settings, Tween, Duration, Async)
 			NewItem:SetCallback(Settings.Callback);
 		end
 
-		RawItem.Position 					= UDim2.new(0, -140, 0, 30 * (Index - 1));
-		RawItem.Extend1.Position 			= UDim2.new(0, 140, 0, 0);
-		RawItem.Extend1.Size 				= UDim2.new(0, -140, 1, 0);
+		RawItem.Position 					= UDim2.new(0, -150, 0, 30 * (Index - 1));
 		NewItem:TweenOnX(0, Tween, Duration, false);
 	end
 
