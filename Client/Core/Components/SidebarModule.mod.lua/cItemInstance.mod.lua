@@ -40,8 +40,8 @@ function InstanceFunctions:GetRaw()
 	return SharedVariables[self].Raw;
 end
 
-function InstanceFunctions:GetExtension()
-	return SharedVariables[self].Extension;
+function InstanceFunctions:GetText()
+	return SharedVariables[self].Text;
 end
 
 function InstanceFunctions:TweenBackgroundColor(NewColor, Tween, Duration, Async)
