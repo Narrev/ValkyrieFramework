@@ -3,7 +3,7 @@
 	"BackgroundColor3":			[12, {"R": 3, "G": 169, "B": 244}],
 	"BackgroundTransparency":	[4, 0],
 	"Position":					[7, {"OffsetX": 10, "ScaleX": 0, "OffsetY": 0, "ScaleY": 0}],
-	"Size": 					[7, {"OffsetX": 140, "ScaleX": 0, "OffsetY": 30, "ScaleY": 0}],
+	"Size": 					[7, {"OffsetX": 150, "ScaleX": 0, "OffsetY": 0, "ScaleY": 1}],
 	"ZIndex": 					[3, 1],
 	"Font": 					[18, 0],
 	"FontSize": 				[18, 6],
