@@ -220,9 +220,10 @@ vmt.__call = function(_, GID, CoKey)
 		"You should not be passing a table or userdata, silly",2);
 	GId = GID;
 	require(script.Core.SecureStorage).Key = CoKey;
+    remoteComm.GiveDependencies(GID, URL, CoKey, ocxi.GetComponent "RequestEncode", ocxi.GetComponent "RequestDecode");
 	local resp
 	if not game:GetService("RunService"):IsStudio() then
-		resp = remoteComm.auth:check({uid = UId}, GID, URL, CoKey, ocxi.GetComponent "RequestEncode", ocxi.GetComponent "RequestDecode");
+		resp = remoteComm.auth:check({uid = UId});
 	else
 		resp = "Studio Bypass";
 	end;
@@ -232,6 +233,9 @@ vmt.__call = function(_, GID, CoKey)
 	else
 		return error("Valkyrie Auth failure!");
 	end;
+	
+	vmt.__call = function() return cxitio end;
+	vmt.__index = ocxi;
 
 	local characterHandler = function(c)
 		local p = game.Players:GetPlayerFromCharacter(c);
@@ -291,8 +295,6 @@ vmt.__call = function(_, GID, CoKey)
 
 	require(script.Shared.Core.Components.IntentService)
 	print("Successfully authenticated Valkyrie for place",GID);
-	vmt.__call = function() return cxitio end;
-	vmt.__index = ocxi;
 	return cxitio
 end;
 
