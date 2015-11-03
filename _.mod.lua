@@ -215,6 +215,8 @@ _G.Valkyrie = cxitio;
 
 local remoteComm = ocxi.GetComponent "RemoteCommunication";
 
+require(repSpace.Core.ValkyrieTranslations);
+
 vmt.__call = function(_, GID, CoKey)
 	assert(type(GID) ~= 'table' and type(GID) ~= 'userdata' and type(CoKey) ~= 'table' and type(CoKey) ~= 'userdata',
 		"You should not be passing a table or userdata, silly",2);
