@@ -26,6 +26,30 @@ translations.LoadLibrary = new("Valkyrie.LoadLibrary", {
     eo_eo           = "SxarguLibrejo";
     fi_fi           = "LataaKirjasto";
 });
+translations.SetComponent = new("Valkyrie.SetComponent", {
+    default         = "SetComponent";
+    en_en           = "SetComponent";
+    en_uk           = "SetComponent";
+    en_us           = "SetComponent";
+    eo_eo           = "...";
+    fi_fi           = "AsetaKomponentti";
+});
+translations.SetService = new("Valkyrie.SetService", {
+    default         = "SetService";
+    en_en           = "SetService";
+    en_uk           = "SetService";
+    en_us           = "SetService";
+    eo_eo           = "...";
+    fi_fi           = "AsetaPalvelu";
+});
+translations.GetSettings = new("Valkyrie.GetSettings", {
+    default         = "GetSettings";
+    en_en           = "GetSettings";
+    en_uk           = "GetSettings";
+    en_us           = "GetSettings";
+    eo_eo           = "...";
+    fi_fi           = "HaeAsetukset";
+});
 
 
 return translations;
