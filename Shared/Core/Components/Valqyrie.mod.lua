@@ -4,7 +4,7 @@ local pack = function(...)
 	return {n=select('#',...),...};
 end;
 
-local rechainer = setmetatable({},{__mode=''k'}),setmetatable({},{__mode='k'});
+local rechainer = setmetatable({},{__mode='k'})
 local qyrobjmt,qyrentrymt,qyrlist,qyrimmediate,qyrimmediatemt;
 local qyrobjmtp,qyrentrymtp,qyrimmediatemtp = newproxy(false),newproxy(false),newproxy(false);
 qyrobjmt = {
